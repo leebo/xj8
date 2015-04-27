@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="bower_components/jquery/dist/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components/underscore/underscore.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components/backbone/backbone.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components/backbone/backbone.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+    <script type="text/template" id="search_template">
+      <label><%= name %></label>
+      <input type="text" id="search_input" />
+      <input type="button" id="search_button" value="Search" />
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div class="row yhq-box" >
+        <div class="col-xs-4 m0 text-left h80" >
+          <img class="img-rounded" src="img/logo1.jpg" height="80px" width="105px" alt="" />
+        </div>
+        <div class="col-xs-5 ml8">
+          <h1>商品名称</h1>
+          <small>商品简单介绍,测试比较长的商品描述，20个字以内</small>
+        </div>
+        <div class="col-xs-3 text-right">
+          <div class="row ">
+            <span class="price">9.9元</span>
+          </div>
+          <div class="row ">
+            剩余11件
+          </div>
+          <div class="row ">
+            <button class="btn btn-noget" type="submit">领光了</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row yhq-box" >
+        <div class="col-xs-4 m0 text-left h80" >
+          <img class="img-rounded" src="img/logo1.jpg" height="80px" width="105px" alt="" />
+        </div>
+        <div class="col-xs-5 ml8">
+          <h1>商品名称</h1>
+          <small>商品简单介绍,测试比较长的商品描述，20个字以内</small>
+        </div>
+        <div class="col-xs-3 text-right">
+          <div class="row ">
+            <span class="price">9.9元</span>
+          </div>
+          <div class="row ">
+            剩余11件
+          </div>
+          <div class="row ">
+            <button class="btn btn-got" type="submit">已领取</button>
+          </div>
+        </div>
+      </div>
+      <div class="row yhq-box" >
+        <div class="col-xs-4 m0 text-left h80" >
+          <img class="img-rounded" src="img/logo1.jpg" height="80px" width="105px" alt="" />
+        </div>
+        <div class="col-xs-5 ml8">
+          <h1>商品名称</h1>
+          <small>商品简单介绍,测试比较长的商品描述，20个字以内</small>
+        </div>
+        <div class="col-xs-3 text-right">
+          <div class="row ">
+            <span class="price">9.9元</span>
+          </div>
+          <div class="row ">
+            剩余11件
+          </div>
+          <div class="row ">
+            <button class="btn btn-used" type="submit">已使用</button>
+          </div>
+        </div>
+      </div>
+      <div class="row yhq-box" >
+        <div class="col-xs-4 m0 text-left h80" >
+          <img class="img-rounded" src="img/logo1.jpg" height="80px" width="105px" alt="" />
+        </div>
+        <div class="col-xs-5 ml8">
+          <h1>商品名称</h1>
+          <small>商品简单介绍,测试比较长的商品描述，20个字以内</small>
+        </div>
+        <div class="col-xs-3 text-right">
+          <div class="row ">
+            <span class="price">9.9元</span>
+          </div>
+          <div class="row ">
+            剩余11件
+          </div>
+          <div class="row ">
+            <button class="btn btn-getting" type="submit">立即领取</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" charset="utf-8">
+    var SearchView = Backbone.View.extend( {
+      el: $("#ccc"),
+      initialize: function() {
+        this.render();
+      },
+
+      render: function() {
+        var templates = _.template( $("#search_template").html() )({name: "bobobobob"});
+        this.$el.html(templates);
+      }
+
+    });
+    var search_view = new SearchView();
+    var Post = Backbone.Model.extend( {
+      idAtrribute: '_id',
+      initialize: function() {
+        this.on("invalid",function(model,error) {
+          alert(model.get("title") + " " + error);
+        });
+        this.on("change:title",function() {
+          alert("title changed");
+        });
+      },
+
+      defaults:  {
+        title: "test1",
+        content: "test content 123",
+      },
+      validate: function(attrs, options) {
+        if (attrs.title.length < 5) {
+          return  "is too short!";
+        }
+      }
+
+    });
+    var Posts = Backbone.Collection.extend({
+      model: Post,
+      initialize: function() {
+        this.on("add remove",function(model) {
+          alert(model.get("title"));
+        })
+      }
+    });
+    post = new Post();
+    post1 = new Post();
+    post2 = new Post();
+    posts = new Posts();
+  </script>
+</html>
