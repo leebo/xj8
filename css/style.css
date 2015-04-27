@@ -1,6 +1,6 @@
 .btn {
   padding: 6px 4px;
-border-radius: 0px;
+  border-radius: 0px;
 }
 
 .btn-getting {
@@ -73,8 +73,8 @@ border-radius: 0px;
   width: 120px;
 }
 html,body {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, "STHeiti", "Microsoft YaHei", Arial, sans-serif;
-    font-size: 14px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, "STHeiti", "Microsoft YaHei", Arial, sans-serif;
+  font-size: 14px;
 }
 
 h1 {
